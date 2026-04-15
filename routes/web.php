@@ -6,8 +6,11 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Fronts\FrontController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,55 +41,69 @@ Route::name('admin.')->prefix('admin')->group(function () {
 
     // Admin Dashboard
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/', [AdminController::class, '__invoke'])->name('index');
+        Route::get('/', [AdminController::class, '__invoke'])->name('index')->middleware('admin');
     });
 
     // Categories
     Route::controller(CategoryController::class)->group(function () {
         Route::resource('categories', CategoryController::class)
-        ->name('*', 'categories')
-        ->except('show');
+            ->name('*', 'categories')
+            ->except('show')
+            ->middleware('admin');
     });
 
     // Products
     Route::controller(ProductController::class)->group(function () {
-        Route::resource('products', ProductController::class)->name('*', 'products');
+        Route::resource('products', ProductController::class)->name('*', 'products')->middleware('admin');
     });
 
     // About
     Route::controller(AboutController::class)->group(function () {
-        Route::resource('abouts', AboutController::class)->name('*', 'abouts');
+        Route::resource('abouts', AboutController::class)->name('*', 'abouts')->middleware('admin');
     });
 
     // Testimonials
     Route::controller(TestimonialController::class)->group(function () {
         Route::resource('testimonials', TestimonialController::class)
-        ->name('*', 'testimonials')
-        ->except(['show', 'edit', 'update']);
+            ->name('*', 'testimonials')
+            ->except(['show', 'edit', 'update'])
+            ->middleware('admin');
     });
 
     // Contact Us
     Route::controller(ContactUsController::class)->group(function () {
         Route::resource('contacts', ContactUsController::class)
-        ->name('*', 'contacts')
-        ->except(['create', 'store', 'edit', 'update']);
+            ->name('*', 'contacts')
+            ->except(['create', 'store', 'edit', 'update'])
+            ->middleware('admin');
     });
 
+    // Settings
+    Route::controller(SettingController::class)->group(function () {
+        Route::resource('settings', SettingController::class)
+            ->name('*', 'settings')
+            ->except(['show', 'create', 'store', 'destroy'])
+            ->middleware('admin');
+    });
+
+    // Sales
+    Route::controller(SaleController::class)->group(function () {
+        Route::resource('sales', SaleController::class)
+            ->name('*', 'sales')
+            ->except(['show', 'create', 'store', 'destroy'])
+            ->middleware('admin');
+    });
+
+    //
+    Route::controller(NewsController::class)->group(function(){
+        Route::resource('news', NewsController::class)->name('*', 'news')->middleware('admin');
+    });
     //
     // Route::controller(::class)->group(function(){
     //     Route::resource('', ::class)->name('*', '');
     // });
+    require __DIR__ . '/authAdmin.php';
 });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__ . '/auth.php';

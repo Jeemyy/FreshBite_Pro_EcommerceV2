@@ -45,6 +45,18 @@
                   <x-Sidebar link="{{ route('admin.contacts.index') }}" icon="fe-mail"
                       title="Contact Us"></x-Sidebar>
 
+                  {{-- Setting --}}
+                  <x-Sidebar link="{{ route('admin.settings.index') }}" icon="fe-settings"
+                      title="Settings"></x-Sidebar>
+
+                  {{-- Sales --}}
+                  <x-Sidebar link="{{ route('admin.sales.index') }}" icon="fe-paperclip"
+                      title="Sales"></x-Sidebar>
+
+                  {{-- News --}}
+                  <x-Sidebar link="{{ route('admin.news.index') }}" icon="fe-monitor"
+                      title="News"></x-Sidebar>
+
                   {{--  --}}
                   {{-- <x-Sidebar link="{{ route('admin..index') }}" icon=""
                       title=""></x-Sidebar> --}}
