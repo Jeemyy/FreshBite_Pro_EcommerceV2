@@ -11,6 +11,7 @@ use App\Http\Controllers\Fronts\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Fronts\ContactUsController as FrontsContactUsController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,17 +23,18 @@ Route::name('fronts.')->group(function () {
         ## About ##
         Route::get('/about', [FrontController::class, 'about'])->name('about');
 
-        ## Pages ##
-        Route::get('/pages', [FrontController::class, 'pages'])->name('pages');
-
         ## News ##
         Route::get('/news', [FrontController::class, 'news'])->name('news');
 
         ## Contact ##
         Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
+        Route::post('/contact', [FrontsContactUsController::class, 'store'])->name('contact.store');
 
         ## Shop ##
         Route::get('/shop', [FrontController::class, 'shop'])->name('shop');
+
+        ## Cart ##
+        Route::get('/cart', [FrontController::class, 'cart'])->name('cart');
     });
 });
 

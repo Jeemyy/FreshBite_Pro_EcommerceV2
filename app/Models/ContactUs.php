@@ -12,4 +12,13 @@ class ContactUs extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'event_date' => 'datetime',
+    ];
+
+    public function getPublishedAtFormattedAttribute()
+    {
+        return $this->event_date->format('d F, Y');
+    }
 }

@@ -1,4 +1,21 @@
-	<div class="footer-area">
+    <!-- logo carousel -->
+    <div class="logo-carousel-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="logo-carousel-inner">
+                        @foreach ($testimonials as $item)
+                            <div class="single-logo-item">
+                                <img src="{{ asset('storage/' . $item->image) }}" alt="">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="footer-area">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
