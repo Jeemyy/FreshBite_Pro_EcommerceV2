@@ -35,8 +35,12 @@ Route::name('fronts.')->group(function () {
 
         ## Cart ##
         Route::get('/cart', [FrontController::class, 'cart'])->name('cart');
+
+        // Route::get('/login/fronts', function(){ return view("fronts.auth.register"); });
     });
 });
+
+require __DIR__ . '/auth.php';
 
 // ########### Admin Routes
 Route::name('admin.')->prefix('admin')->group(function () {
