@@ -4,6 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Notifications\AdminNotificationMail;
+use App\Notifications\EmailNotifiction;
+use App\Notifications\UserNotificationMail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +16,11 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
+        public function sendPasswordResetNotification($token)
+    {
+        return $this->notify(new UserNotificationMail($token));
+    }
 
     /**
      * The attributes that are mass assignable.

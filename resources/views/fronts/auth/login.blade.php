@@ -106,6 +106,7 @@
                             <a href="{{ route('register') }}">
                                 <span>Create an account</span>
                             </a>
+                            <a href="{{ route('password.request') }}" style="display: flex; justify-content: center;">Forgot Password</a>
                         </p>
                     </div>
                 </div>
