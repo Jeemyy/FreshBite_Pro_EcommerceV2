@@ -17,9 +17,19 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-        public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token)
     {
         return $this->notify(new UserNotificationMail($token));
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
 
     /**
