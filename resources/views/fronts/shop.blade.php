@@ -30,7 +30,7 @@
                         <ul>
                             <li class="active" data-filter="*">All</li>
                             @foreach ($categories as $item)
-                                <li data-filter=".{{$item->id}}">{{ $item->title}}</li>
+                                <li data-filter=".{{ $item->id }}">{{ $item->title }}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -39,18 +39,22 @@
 
             <div class="row product-lists">
                 @foreach ($products as $item)
-
-                <div class="col-lg-4 col-md-6 text-center {{$item->category->id}}">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a href="single-product.html"><img
-                                    src="{{ asset('storage/'. $item->image) }}" alt=""></a>
+                    <div class="col-lg-4 col-md-6 text-center {{ $item->category->id }}">
+                        <div class="single-product-item">
+                            <div class="product-image">
+                                <a href="single-product.html"><img src="{{ asset('storage/' . $item->image) }}"
+                                        alt=""></a>
+                            </div>
+                            <h3>{{ $item->title }}</h3>
+                            <p class="product-price"><span>Per Kg</span> {{ $item->price }}$ </p>
+                            <form action="{{ route('fronts.cart.cart.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            </form>
                         </div>
-                        <h3>{{$item->title}}</h3>
-                        <p class="product-price"><span>Per Kg</span> {{$item->price}}$ </p>
-                        <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
-                </div>
                 @endforeach
             </div>
 

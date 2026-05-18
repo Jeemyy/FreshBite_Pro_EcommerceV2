@@ -11,6 +11,7 @@ use App\Http\Controllers\Fronts\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Fronts\CartController;
 use App\Http\Controllers\Fronts\ContactUsController as FrontsContactUsController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -34,9 +35,13 @@ Route::name('fronts.')->group(function () {
         Route::get('/shop', [FrontController::class, 'shop'])->name('shop');
 
         ## Cart ##
-        Route::get('/cart', [FrontController::class, 'cart'])->name('cart');
-
-        // Route::get('/login/fronts', function(){ return view("fronts.auth.register"); });
+        Route::name('cart.')->middleware('auth')->group(function () {
+            Route::get('/cart', [FrontController::class, 'cart']);
+        });
+        Route::middleware('auth')->name('cart.')->group(function () {
+            Route::resource('/cart', CartController::class)
+                ->except(['index', 'show', 'edit']);
+        });
     });
 });
 
@@ -101,7 +106,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
     });
 
     //
-    Route::controller(NewsController::class)->group(function(){
+    Route::controller(NewsController::class)->group(function () {
         Route::resource('news', NewsController::class)->name('*', 'news')->middleware('admin');
     });
     //
@@ -110,6 +115,3 @@ Route::name('admin.')->prefix('admin')->group(function () {
     // });
     require __DIR__ . '/authAdmin.php';
 });
-
-
-
