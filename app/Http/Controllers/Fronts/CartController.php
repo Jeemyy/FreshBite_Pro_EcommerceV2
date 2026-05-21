@@ -6,21 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function store(Request $request)
     {
         $request->validate([
-            'product_id'        =>     'required|exists:products,id',
-            'quantity'          =>     'required|integer|min:1'
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
         ]);
         $product = Product::findOrFail($request->product_id);
         $cart = Cart::firstOrCreate([
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ]);
 
         $item = CartItem::where('cart_id', $cart->id)
@@ -31,10 +29,10 @@ class CartController extends Controller
             $item->save();
         } else {
             CartItem::create([
-                'cart_id'       =>      $cart->id,
-                'product_id'    =>      $product->id,
-                'quantity'      =>      $request->quantity,
-                'price'         =>      $product->price
+                'cart_id' => $cart->id,
+                'product_id' => $product->id,
+                'quantity' => $request->quantity,
+                'price' => $product->price,
             ]);
         }
 
@@ -51,6 +49,6 @@ class CartController extends Controller
 
         $item->delete();
 
-        return redirect()->back()->with("success", "Item removed successfully");
+        return redirect()->back()->with('success', 'Item removed successfully');
     }
 }

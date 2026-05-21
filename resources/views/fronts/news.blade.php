@@ -27,17 +27,17 @@ Fruitkha - About
                 @foreach ($news as $item)
 				<div class="col-lg-4 col-md-6">
 					<div class="single-latest-news">
-						<a href="single-news.html">
+<a href="{{ route('fronts.single-news', $item->id) }}">
                             <img src="{{ asset('storage/' . $item->image) }}" alt="">
                         </a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">{{ $item->title }}</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i>{{Auth::guard('admin')->name }}</span>
-								<span class="date"><i class="fas fa-calendar"></i>{{ $item->published_at }}</span>
-							</p>
-							<p class="excerpt">{{ $item->description }}</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+                        <div class="news-text-box">
+                            <h3><a href="{{ route('fronts.single-news', $item->id) }}">{{ $item->title }}</a></h3>
+                            <p class="blog-meta">
+                                <span class="author"><i class="fas fa-user"></i>{{Auth::guard('admin')->name }}</span>
+                                <span class="date"><i class="fas fa-calendar"></i>{{ $item->published_at }}</span>
+                            </p>
+                            <p class="excerpt">{{ $item->description }}</p>
+                            <a href="{{ route('fronts.single-news', $item->id) }}" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>

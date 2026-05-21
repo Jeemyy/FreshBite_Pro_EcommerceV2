@@ -4,7 +4,6 @@ namespace App\Http\Controllers\AuthAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,7 +44,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($admin));
 
-        Auth::login($admin);
+        Auth::guard('admin')->login($admin);
 
         return redirect(route('admin.index'));
     }

@@ -43,7 +43,7 @@
                                     @foreach ($cart->items as $item)
                                         <tr class="table-body-row">
                                             <td class="product-remove"><a href="#">
-                                                    <form action="{{ route('fronts.cart.cart.destroy', $item->id) }}"
+                                                    <form action="{{ route('fronts.cart.destroy', $item->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -108,8 +108,7 @@
                             </tbody>
                         </table>
                         <div class="cart-buttons">
-                            <a href="cart.html" class="boxed-btn">Update Cart</a>
-                            <a href="checkout.html" class="boxed-btn black">Check Out</a>
+                            <a href="{{ route('fronts.cart.checkout') }}" class="boxed-btn black">Check Out</a>
                         </div>
                     </div>
 

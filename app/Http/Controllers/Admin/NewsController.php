@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\News;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreNewsRequest;
 use App\Http\Requests\Admin\UpdateNewsRequest;
+use App\Models\News;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
@@ -16,6 +16,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::all();
+
         return view('admin.news.index', get_defined_vars());
     }
 
@@ -32,7 +33,7 @@ class NewsController extends Controller
      */
     public function store(StoreNewsRequest $request)
     {
-        $new = new News();
+        $new = new News;
         $data = $request->validated();
         // dd($data);
         $new->title = $data['title'];
@@ -41,7 +42,7 @@ class NewsController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->image;
-            $imageName = time() . '-' . $image->getClientOriginalName();
+            $imageName = time().'-'.$image->getClientOriginalName();
             $path = $image->storeAs('news', $imageName, 'public');
             $new->image = $path;
         }
@@ -56,7 +57,7 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        //
+        return view('admin.news.show', get_defined_vars());
     }
 
     /**

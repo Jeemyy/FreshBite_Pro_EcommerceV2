@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('quantity');
             $table->string('image')->nullable();
 
-            
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();

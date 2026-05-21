@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ContactUs;
 use App\Http\Controllers\Controller;
+use App\Models\ContactUs;
 
 class ContactUsController extends Controller
 {
@@ -13,6 +13,7 @@ class ContactUsController extends Controller
     public function index()
     {
         $contacts = ContactUs::all();
+
         return view('admin.contacts.index', get_defined_vars());
     }
 
@@ -32,6 +33,7 @@ class ContactUsController extends Controller
         // $contactUs->delete();
 
         $contactUs->delete();
+
         return to_route('admin.contacts.index')->with('success', 'Contact Deleted Successfully');
     }
 }

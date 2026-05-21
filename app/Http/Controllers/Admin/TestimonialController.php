@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Testimonial;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreTestimonialRequest;
-use App\Http\Requests\Admin\UpdateTestimonialRequest;
+use App\Models\Testimonial;
 use Illuminate\Support\Facades\Storage;
 
 class TestimonialController extends Controller
@@ -16,6 +15,7 @@ class TestimonialController extends Controller
     public function index()
     {
         $testimonials = Testimonial::all();
+
         return view('admin.testimonials.index', get_defined_vars());
     }
 
@@ -32,14 +32,14 @@ class TestimonialController extends Controller
      */
     public function store(StoreTestimonialRequest $request)
     {
-        $testimonial = new Testimonial();
+        $testimonial = new Testimonial;
         $data = $request->validated();
         // dd($data);
         $testimonial->title = $data['title'];
 
         if ($request->hasFile('image')) {
             $image = $request->image;
-            $imageName = time() . '-' . $image->getClientOriginalName();
+            $imageName = time().'-'.$image->getClientOriginalName();
             $path = $image->storeAs('testimonials', $imageName, 'public');
             $testimonial->image = $path;
         }

@@ -8,20 +8,18 @@ use Illuminate\Support\ServiceProvider;
 
 class FooterServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
-        $testimonials = Testimonial::all();
-        View::share('testimonials', $testimonials);
+        try {
+            $testimonials = Testimonial::all();
+            View::share('testimonials', $testimonials);
+        } catch (\Exception $e) {
+            View::share('testimonials', collect());
+        }
     }
 }

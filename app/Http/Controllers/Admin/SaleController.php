@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Sale;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateSaleRequest;
+use App\Models\Sale;
 
 class SaleController extends Controller
 {
@@ -16,7 +16,6 @@ class SaleController extends Controller
         $sale = Sale::firstOrCreate([], [
             'sale' => ['month' => '', 'discount' => ''],
         ]);
-
 
         return view('admin.sales.index', get_defined_vars());
     }

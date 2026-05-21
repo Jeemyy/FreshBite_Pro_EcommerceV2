@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -15,6 +14,7 @@ class UserNotificationMail extends Notification
      * Create a new notification instance.
      */
     public $token;
+
     public function __construct($token)
     {
         $this->token = $token;
@@ -44,7 +44,7 @@ class UserNotificationMail extends Notification
 
             ->line('Click the button below to securely reset your password.')
 
-            ->action('Reset Password', url('/reset-password/' . $this->token . '?email=' . $notifiable->email))
+            ->action('Reset Password', url('/reset-password/'.$this->token.'?email='.$notifiable->email))
 
             ->line('This password reset link will expire in 60 minutes.')
 
@@ -52,6 +52,7 @@ class UserNotificationMail extends Notification
 
             ->salutation('Regards, Fruitkha Team 🍍');
     }
+
     /**
      * Get the array representation of the notification.
      *

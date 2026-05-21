@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -15,6 +14,7 @@ class EmailNotifiction extends Notification
      * Create a new notification instance.
      */
     public $token;
+
     public function __construct($token)
     {
         $this->token = $token;
@@ -36,10 +36,10 @@ class EmailNotifiction extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('Hello There! Sorry for hearing your forget your Password. But Don\'t Worry! We Can Generate A New Password')
-                    ->action('Reset New Password', url('/reset-password/'.$this->token))
-                    ->line('Thank you for using our application!')
-                    ->line('Don\'t Worry, For Every Think, Your Security is Our Top Priority');
+            ->line('Hello There! Sorry for hearing your forget your Password. But Don\'t Worry! We Can Generate A New Password')
+            ->action('Reset New Password', url('/reset-password/'.$this->token))
+            ->line('Thank you for using our application!')
+            ->line('Don\'t Worry, For Every Think, Your Security is Our Top Priority');
     }
 
     /**

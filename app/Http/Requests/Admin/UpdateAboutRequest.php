@@ -22,9 +22,9 @@ class UpdateAboutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'         => 'required',
-            'icon'          => 'nullable|mimes:png,jpg,jpeg',
-            'description'   => 'nullable',
+            'title' => 'required',
+            'icon' => 'nullable|mimes:png,jpg,jpeg',
+            'description' => 'nullable',
         ];
     }
 }

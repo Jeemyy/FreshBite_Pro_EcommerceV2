@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\About;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAboutRequest;
 use App\Http\Requests\Admin\UpdateAboutRequest;
+use App\Models\About;
 use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
@@ -16,6 +16,7 @@ class AboutController extends Controller
     public function index()
     {
         $abouts = About::all();
+
         return view('admin.abouts.index', get_defined_vars());
     }
 
@@ -32,7 +33,7 @@ class AboutController extends Controller
      */
     public function store(StoreAboutRequest $request)
     {
-        $about = new About();
+        $about = new About;
         $data = $request->validated();
         // dd($data);
         $about->title = $data['title'];
@@ -40,7 +41,7 @@ class AboutController extends Controller
 
         if ($request->hasFile('icon')) {
             $icon = $request->icon;
-            $iconName = time() . '-' . $icon->getClientOriginalName();
+            $iconName = time().'-'.$icon->getClientOriginalName();
             $path = $icon->storeAs('abouts', $iconName, 'public');
             $about->icon = $path;
         }

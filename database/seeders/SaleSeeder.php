@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Sale;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SaleSeeder extends Seeder
@@ -17,8 +16,8 @@ class SaleSeeder extends Seeder
             ['id' => 1],
             [
                 'sale' => [
-                    'month'     => "December",
-                    'discount'  => '50'
+                    'month' => 'December',
+                    'discount' => '50',
                 ],
             ]
         );

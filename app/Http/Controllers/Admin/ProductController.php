@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreProductRequest;
 use App\Http\Requests\Admin\UpdateProductRequest;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -17,6 +17,7 @@ class ProductController extends Controller
     public function index(Product $products)
     {
         $products = Product::all();
+
         return view('admin.products.index', get_defined_vars());
     }
 
@@ -25,7 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories  = Category::all();
+        $categories = Category::all();
+
         return view('admin.products.create', get_defined_vars());
     }
 
@@ -34,7 +36,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = new Product();
+        $product = new Product;
         $data = $request->validated();
         // dd($data);
         $product->title = $data['title'];
@@ -45,7 +47,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->image;
-            $imageName = time() . '-' . $image->getClientOriginalName();
+            $imageName = time().'-'.$image->getClientOriginalName();
             $path = $image->storeAs('products', $imageName, 'public');
             $product->image = $path;
         }
@@ -69,6 +71,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
+
         return view('admin.products.edit', get_defined_vars());
     }
 
@@ -94,6 +97,7 @@ class ProductController extends Controller
         return to_route('admin.products.index')
             ->with('success', 'Product Updated Successfully');
     }
+
     /**
      * Remove the specified resource from storage.
      */

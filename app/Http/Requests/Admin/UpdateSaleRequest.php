@@ -22,7 +22,7 @@ class UpdateSaleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sale.month'    => 'nullable|string|max:255',
+            'sale.month' => 'nullable|string|max:255',
             'sale.discount' => 'nullable|max:255',
         ];
     }

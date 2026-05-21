@@ -14,6 +14,6 @@ class Setting extends Model
 
     protected $casts = [
         'contact' => 'array',
-        'pages'   => 'array',
+        'pages' => 'array',
     ];
 }

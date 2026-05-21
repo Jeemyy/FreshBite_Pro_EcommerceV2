@@ -42,12 +42,12 @@
                     <div class="col-lg-4 col-md-6 text-center {{ $item->category->id }}">
                         <div class="single-product-item">
                             <div class="product-image">
-                                <a href="single-product.html"><img src="{{ asset('storage/' . $item->image) }}"
+                                <a href="{{ route('fronts.single-product', $item->id) }}"><img src="{{ asset('storage/' . $item->image) }}"
                                         alt=""></a>
                             </div>
                             <h3>{{ $item->title }}</h3>
                             <p class="product-price"><span>Per Kg</span> {{ $item->price }}$ </p>
-                            <form action="{{ route('fronts.cart.cart.store') }}" method="POST">
+                            <form action="{{ route('fronts.cart.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $item->id }}">
                                 <input type="hidden" name="quantity" value="1">

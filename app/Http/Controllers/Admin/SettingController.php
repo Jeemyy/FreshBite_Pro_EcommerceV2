@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Setting;
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\Admin\UpdateSettingRequest;
+use App\Models\Setting;
 
 class SettingController extends Controller
 {
@@ -16,9 +15,9 @@ class SettingController extends Controller
     {
         // جلب أول record موجود أو إنشاء واحد افتراضي إذا مش موجود
         $setting = Setting::firstOrCreate([], [
-            'about'   => null,
+            'about' => null,
             'contact' => ['address' => '', 'email' => '', 'phone' => ''],
-            'pages'   => [],
+            'pages' => [],
         ]);
 
         // قائمة الصفحات الممكن الاختيار منها
@@ -34,13 +33,13 @@ class SettingController extends Controller
     {
         // جمع البيانات لتخزينها
         $data = [
-            'about'   => $request->input('about', null),
+            'about' => $request->input('about', null),
             'contact' => [
                 'address' => $request->input('contact.address', ''),
-                'email'   => $request->input('contact.email', ''),
-                'phone'   => $request->input('contact.phone', ''),
+                'email' => $request->input('contact.email', ''),
+                'phone' => $request->input('contact.phone', ''),
             ],
-            'pages'   => $request->input('pages', []), // array of selected pages
+            'pages' => $request->input('pages', []), // array of selected pages
         ];
 
         // تحديث البيانات في قاعدة البيانات

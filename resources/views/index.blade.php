@@ -13,8 +13,8 @@
                             <p class="subtitle">Fresh & Organic</p>
                             <h1>Delicious Seasonal Fruits</h1>
                             <div class="hero-btns">
-                                <a href="shop.html" class="boxed-btn">Fruit Collection</a>
-                                <a href="contact.html" class="bordered-btn">Contact Us</a>
+                                <a href="{{ route('fronts.shop') }}" class="boxed-btn">Fruit Collection</a>
+                                <a href="{{ route('fronts.contact') }}" class="bordered-btn">Contact Us</a>
                             </div>
                         </div>
                     </div>
@@ -86,11 +86,11 @@
                     <div class="col-lg-6 col-md-5 text-center">
                         <div class="single-product-item">
                             <div class="product-image">
-                                <a href="single-product.html"><img src="{{ asset('storage/' . $item->image) }}"
+                                <a href="{{ route('fronts.single-product', $item->id) }}"><img src="{{ asset('storage/' . $item->image) }}"
                                         alt="" style="width: 150px"></a>
                             </div>
                             <h3>{{ $item->title }}</h3>
-                            <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Go To Shopping</a>
+                            <a href="{{ route('fronts.cart.index') }}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Go To Shopping</a>
                         </div>
                     </div>
                 @endforeach
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="cart.html" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    <a href="{{ route('fronts.cart.index') }}" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                 </div>
             </div>
         </div>
@@ -227,7 +227,7 @@
                             interdum velit. Nam eu molestie lorem.</p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente facilis illo repellat
                             veritatis minus, et labore minima mollitia qui ducimus.</p>
-                        <a href="about.html" class="boxed-btn mt-4">know more</a>
+                        <a href="{{ route('fronts.about') }}" class="boxed-btn mt-4">know more</a>
                     </div>
                 </div>
             </div>
@@ -242,7 +242,7 @@
             </h3>
             <div class="sale-percent"><span>Sale! <br> Upto</span>{{ $sale->sale['discount'] ?? '' }} <span>off</span>
             </div>
-            <a href="shop.html" class="cart-btn btn-lg">Shop Now</a>
+            <a href="{{ route('fronts.shop') }}" class="cart-btn btn-lg">Shop Now</a>
         </div>
     </section>
     <!-- end shop banner -->
@@ -265,17 +265,17 @@
                 @foreach ($news as $item)
                     <div class="col-lg-4 col-md-6">
                         <div class="single-latest-news">
-                            <a href="single-news.html">
+                            <a href="{{ route('fronts.single-news', $item->id) }}">
                                 <img src="{{ asset('storage/' . $item->image) }}" alt="">
                             </a>
                             <div class="news-text-box">
-                                <h3><a href="single-news.html">{{ $item->title }}</a></h3>
+                                <h3><a href="{{ route('fronts.single-news', $item->id) }}">{{ $item->title }}</a></h3>
                                 <p class="blog-meta">
                                     <span class="author"><i class="fas fa-user"></i> Admin</span>
                                     <span class="date"><i class="fas fa-calendar"></i>{{ $item->published_at }}</span>
                                 </p>
                                 <p class="excerpt">{{ $item->description }}</p>
-                                <a href="single-news.html" class="read-more-btn">read more <i
+                                <a href="{{ route('fronts.single-news', $item->id) }}" class="read-more-btn">read more <i
                                         class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
@@ -284,7 +284,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <a href="news.html" class="boxed-btn">More News</a>
+                    <a href="{{ route('fronts.news') }}" class="boxed-btn">More News</a>
                 </div>
             </div>
         </div>

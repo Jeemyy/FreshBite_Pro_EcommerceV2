@@ -22,12 +22,12 @@ class UpdateSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'about'             => 'nullable|string|max:500',
-            'contact.address'   => 'nullable|string|max:255',
-            'contact.email'     => 'nullable|email|max:255',
-            'contact.phone'     => 'nullable|string|max:20',
-            'pages'             => 'required|array',       // لازم يختار صفحة واحدة على الأقل
-            'pages.*'           => 'required|string|max:255', // كل عنصر في array لازم يكون نص
+            'about' => 'nullable|string|max:500',
+            'contact.address' => 'nullable|string|max:255',
+            'contact.email' => 'nullable|email|max:255',
+            'contact.phone' => 'nullable|string|max:20',
+            'pages' => 'required|array',       // لازم يختار صفحة واحدة على الأقل
+            'pages.*' => 'required|string|max:255', // كل عنصر في array لازم يكون نص
         ];
     }
 }

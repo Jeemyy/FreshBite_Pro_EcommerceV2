@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategoryRequest;
 use App\Http\Requests\Admin\UpdateCategoryRequest;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -16,7 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin.categorys.index', get_defined_vars());
+
+        return view('admin.categories.index', get_defined_vars());
     }
 
     /**
@@ -24,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categorys.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -32,20 +33,21 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $cat = new Category();
+        $cat = new Category;
         $data = $request->validated();
 
         $cat->title = $data['title'];
 
         $image = $request->image;
 
-        $imageName = time() . '-' . $image->getClientOriginalName();
+        $imageName = time().'-'.$image->getClientOriginalName();
 
         $path = $image->storeAs('categories', $imageName, 'public');
 
         $data['image'] = $path;
 
         Category::create($data);
+
         return to_route('admin.categories.index')->with('success', 'Category Created Successfully');
     }
 
@@ -62,7 +64,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categorys.edit', get_defined_vars());
+        return view('admin.categories.edit', get_defined_vars());
     }
 
     /**
@@ -82,7 +84,7 @@ class CategoryController extends Controller
 
             return to_route('admin.categories.index')->with('success', 'Category Updated Successfully');
         }
-        $imageName = time() . '-' . $image->getClientOriginalName();
+        $imageName = time().'-'.$image->getClientOriginalName();
 
         $path = $image->storeAs('categories', $imageName, 'public');
         $data['image'] = $path;
