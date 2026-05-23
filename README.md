@@ -1,4 +1,4 @@
-# 🛒 Fruitkha — Organic Grocery E-Commerce Platform
+# 🛒 FreshBite — Organic Grocery E-Commerce Platform
 
 A full-featured e-commerce application for organic fruits and groceries, built with **Laravel 12**, featuring a dual-authentication system (customers + admin panel), complete order lifecycle management, role-based access control, and a service-oriented architecture.
 
@@ -22,7 +22,7 @@ A full-featured e-commerce application for organic fruits and groceries, built w
 
 ## 🏗 Architecture Overview
 
-Fruitkha follows a **monolithic architecture with a service-oriented layer** — a standard Laravel 12 application where business logic is organized into dedicated service classes, controllers, and models. The architecture separates concerns into three main areas:
+FreshBite follows a **monolithic architecture with a service-oriented layer** — a standard Laravel 12 application where business logic is organized into dedicated service classes, controllers, and models. The architecture separates concerns into three main areas:
 
 | Layer | Responsibility |
 |---|---|
@@ -322,7 +322,7 @@ cp .env.example .env
 php artisan key:generate
 
 # Configure .env with your database credentials
-# DB_DATABASE=fruitkha_maintain_v2
+# DB_DATABASE=freshbite
 # DB_USERNAME=root
 # DB_PASSWORD=
 
